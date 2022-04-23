@@ -7,18 +7,22 @@ export const Resprovider: FC<any> = (props: any) => {
   const [resItem, setResItem] = useState<IMovie[]>([]);
 
   useEffect((): void => {
-    const key = process.env.REACT_APP_IMDB_API_KEY;
-    console.log(key);
+    // const key = process.env.REACT_APP_IMDB_API_KEY;
+    // console.log(key);
+
     const api = async () => {
       const data = await fetch(
-        `https://imdb-api.com/en/API/Top250Movies/${key}`
+        `https://imdb-api.com/en/API/Top250Movies/${process.env.REACT_APP_IMDB_API_KEY}`
       );
       console.log(data);
       const res = await data.json();
+      console.log("results", res)
 
       //console.log("result items",res.items);
 
+      // const resultItems = res.items
       setResItem(res.items);
+      
       console.log("state result", resItem);
     };
     api();
